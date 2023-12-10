@@ -10,23 +10,22 @@ const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Anime Vault",
-  description: "Your favorite anime, all in one place.",
+  description: "Ваши любимые аниме в одном месте",
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body className={dmSans.className}>
-        <main className="max-w-7xl mx-auto bg-[#0F1117]">
+        <main className="max-w-7xl mx-auto bg-[#1f2330]">
           <Header />
           {children}
           <Footer />
         </main>
-        
       </body>
     </html>
   );

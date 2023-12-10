@@ -1,5 +1,5 @@
 "use client";
-import { fetchAnime } from "@/app/action";
+import { fetchAllAnimes } from "@/app/actions";
 import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
@@ -14,7 +14,7 @@ function LoadMore() {
 
   React.useEffect(() => {
     if (inView) {
-      fetchAnime(page).then((res) => {
+      fetchAllAnimes(page).then((res) => {
         setData([...data, ...res]);
         page++;
       });
