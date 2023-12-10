@@ -2,18 +2,7 @@ import Image from "next/image";
 
 import { MotionDiv } from "./MotionDiv";
 import Link from "next/link";
-
-export interface AnimeProp {
-  id: string;
-  russian: string;
-  image: {
-    original: string;
-  };
-  kind: string;
-  episodes: number;
-  episodes_aired: number;
-  score: string;
-}
+import { AnimeProp } from "@/lib/types";
 
 interface Prop {
   anime: AnimeProp;
@@ -34,7 +23,7 @@ function AnimeCard({ anime, index }: Prop) {
       transition={{ delay: index * 0.25, ease: "easeInOut", duration: 0.5 }}
       className="max-w-sm rounded relative w-full"
     >
-      <Link href={`${anime.id}`}>
+      <Link href={`/anime/${anime.id}`}>
         <div className="relative w-full h-[37vh]">
           <Image
             src={`https://shikimori.one${anime.image.original}`}

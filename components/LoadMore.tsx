@@ -1,5 +1,5 @@
 "use client";
-import { fetchAllAnimes } from "@/app/actions";
+import { fetchAllAnimes } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +7,9 @@ import AnimeCard from "./AnimeCard";
 
 let page = 2;
 
+
 export type AnimeCard = JSX.Element;
+
 function LoadMore() {
   const { ref, inView } = useInView();
   const [data, setData] = React.useState<AnimeCard[]>([]);
@@ -30,7 +32,7 @@ function LoadMore() {
         <div ref={ref}>
           <Image
             src="./spinner.svg"
-            alt="spinner"
+            alt="загрузка"
             width={56}
             height={56}
             className="object-contain"
