@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import logoImage from '../public/logo.svg';
+
 function Hero() {
   return (
     <header className="bg-hero bg-top bg bg-cover bg-no-repeat sm:p-16 py-8 sm:py-16 px-7 flex justify-center lg:items-center max-lg:flex-col w-full sm:gap-16 gap-0">
       <Link href='/'>
         <div className="flex-1 flex flex-col items-center gap-5 sm:flex-row sm:gap-10">
           <Image
-            src="./logo.svg"
+            src={logoImage}
             alt="logo"
             width={101}
             height={96}

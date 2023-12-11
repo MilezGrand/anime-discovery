@@ -9,7 +9,7 @@ interface Prop {
   params: { id: string };
 }
 
-const AnimePage = async ({ params }: Prop) => {
+const AnimeCardPage = async ({ params }: Prop) => {
   const id = params.id;
   const data: AnimeProp = await fetchAnime(id);
   const similarAnimes = await fetchSimilar(id);
@@ -72,4 +72,4 @@ const AnimePage = async ({ params }: Prop) => {
   )
 }
 
-export default AnimePage;
+export default AnimeCardPage;

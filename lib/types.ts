@@ -24,6 +24,26 @@ export interface AnimeProp {
   }[]
 }
 
+export interface MangaProp {
+  id: string;
+  russian: string;
+  image: {
+    original: string;
+    preview: string;
+  };
+  kind: string;
+  chapters: number;
+  volumes: number;
+  score: string;
+  description: string;
+  released_on: string;
+  rating: string;
+  genres: {
+    id: number;
+    russian: string;
+  }[];
+}
+
 export interface Genre {
   id: number;
   name: string;

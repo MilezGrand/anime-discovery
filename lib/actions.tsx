@@ -1,7 +1,7 @@
 "use server";
 
 import AnimeCard from "@/components/AnimeCard";
-import { AnimeProp } from "@/lib/types";
+import { AnimeProp, MangaProp } from "@/lib/types";
 
 export const fetchAllAnimes = async (page: number) => {
   const response = await fetch(
@@ -9,9 +9,7 @@ export const fetchAllAnimes = async (page: number) => {
   );
 
   const data = await response.json();
-  return data.map((item: AnimeProp, index: number) => (
-    <AnimeCard key={item.id} anime={item} index={index} />
-  ));
+  return data;
 };
 
 export const fetchAnime = async (id: string) => {
@@ -63,7 +61,5 @@ export const fetchAllMangas = async (page: number) => {
 
   const data = await response.json();
 
-  return data.map((item: AnimeProp, index: number) => (
-    <AnimeCard key={item.id} anime={item} index={index} />
-  ));
+  return data;
 }
