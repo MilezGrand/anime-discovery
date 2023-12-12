@@ -5,7 +5,6 @@ import { IAnime } from '@/lib/types';
 import Link from 'next/link';
 
 interface AnimeCardPageProps {
-  anime: IAnime;
   params: { id: string };
 }
 
