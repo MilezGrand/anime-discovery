@@ -2,14 +2,14 @@ import Image from "next/image";
 
 import { MotionDiv } from "./MotionDiv";
 import Link from "next/link";
-import { AnimeProp, MangaProp } from "@/lib/types";
+import { IAnime, IManga } from "@/lib/types";
 
 import episodesImage from '../public/episodes.svg'
 import starImage from '../public/star.svg'
 
-interface Prop {
-  anime?: AnimeProp;
-  manga?: MangaProp;
+interface CardProp {
+  anime?: IAnime;
+  manga?: IManga;
   index: number;
 }
 
@@ -18,7 +18,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-function Card({ anime, manga, index }: Prop) {
+function Card({ anime, manga, index }: CardProp) {
   return (
     <MotionDiv
       variants={variants}
@@ -27,7 +27,7 @@ function Card({ anime, manga, index }: Prop) {
       transition={{ delay: index * 0.25, ease: "easeInOut", duration: 0.5 }}
       className="max-w-sm rounded relative w-full"
     >
-      <Link href={anime? `/anime/${anime.id}` : `/manga/${manga!.id}`}>
+      <Link href={anime ? `/anime/${anime.id}` : `/manga/${manga!.id}`}>
         <div className="relative w-full h-[37vh]">
           <Image
             src={`https://shikimori.one${anime ? anime!.image.original : manga!.image.original}`}

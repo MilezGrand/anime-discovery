@@ -9,7 +9,7 @@ import spinnerImage from '@/public/spinner.svg'
 
 let page = 2;
 
-interface Props {
+interface LoadMoreProp {
   anime?: boolean;
   manga?: boolean;
   genre?: boolean;
@@ -18,7 +18,7 @@ interface Props {
 
 export type AnimeCard = JSX.Element;
 
-const LoadMore = ({ anime, manga, genre, genreId }: Props) => {
+const LoadMore = ({ anime, manga, genre, genreId }: LoadMoreProp) => {
   const { ref, inView } = useInView();
   const [data, setData] = React.useState<AnimeCard[]>([]);
 

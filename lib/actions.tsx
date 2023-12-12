@@ -1,7 +1,7 @@
 "use server";
 
 import AnimeCard from "@/components/Card";
-import { AnimeProp, MangaProp } from "@/lib/types";
+import { IAnime, IManga } from "@/lib/types";
 
 export const fetchAllAnimes = async (page: number) => {
   const response = await fetch(
@@ -27,7 +27,7 @@ export const fetchSimilar = async (id: string) => {
   );
 
   const data = await response.json();
-  return data.slice(0, 4).map((item: AnimeProp, index: number) => (
+  return data.slice(0, 4).map((item: IAnime, index: number) => (
     <AnimeCard key={item.id} anime={item} index={index} />
   ));
 }
@@ -38,8 +38,8 @@ export const fetchSimilarManga = async (id: string) => {
   );
 
   const data = await response.json();
-  return data.slice(0, 4).map((item: AnimeProp, index: number) => (
-    <AnimeCard key={item.id} anime={item} index={index} />
+  return data.slice(0, 4).map((item: IManga, index: number) => (
+    <AnimeCard key={item.id} manga={item} index={index} />
   ));
 }
 
