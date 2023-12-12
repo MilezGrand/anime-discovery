@@ -19,7 +19,7 @@ const AnimeCardPage = async ({ params }: Prop) => {
   const clearDescription = data.description ? data.description.replace(/{.*?}/g, "")
     .replace(/\[.*?\]/g, "")
     .replace('[', "")
-    .replace(']', "") : 'Нет описания';
+    .replace(']', "") : 'Отсутствует';
 
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">

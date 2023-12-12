@@ -21,7 +21,7 @@ export interface AnimeProp {
   studios: {
     id: number;
     image: string;
-  }[]
+  }[];
 }
 
 export interface MangaProp {
@@ -37,10 +37,15 @@ export interface MangaProp {
   score: string;
   description: string;
   released_on: string;
+  aired_on: string;
   rating: string;
   genres: {
     id: number;
     russian: string;
+  }[];
+  publishers: {
+    id: number;
+    name: string;
   }[];
 }
 

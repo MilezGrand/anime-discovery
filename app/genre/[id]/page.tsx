@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import LoadMore from "@/components/LoadMore";
 import { fetchAllGenres, fetchGenre } from "@/lib/actions";
 import { Genre } from "@/lib/types";
@@ -17,9 +18,11 @@ const GenrePage = async ({ params }: Prop) => {
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
       <h2 className="text-3xl text-white font-bold">Аниме жанра {genre[0].russian}</h2>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 justify-center">
-        {data}
+      {data.map((item: any, index: number) => (
+          <Card key={item.id} manga={item} index={index} />
+        ))}
       </section>
-      {/* <LoadMore fetchRequest={() => fetchGenre(1, id)}/> */}
+      <LoadMore genre genreId={id}/>
     </main>
   );
 }

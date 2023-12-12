@@ -1,37 +1,61 @@
 "use client";
-import { fetchAllAnimes } from "@/lib/actions";
+import { fetchAllAnimes, fetchAllMangas, fetchGenre } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import AnimeCard from "./AnimeCard";
+import AnimeCard from "./Card";
+
+import spinnerImage from '@/public/spinner.svg'
 
 let page = 2;
 
+interface Props {
+  anime?: boolean;
+  manga?: boolean;
+  genre?: boolean;
+  genreId?: string;
+}
 
 export type AnimeCard = JSX.Element;
 
-function LoadMore() {
+const LoadMore = ({ anime, manga, genre, genreId }: Props) => {
   const { ref, inView } = useInView();
   const [data, setData] = React.useState<AnimeCard[]>([]);
 
   React.useEffect(() => {
     if (inView) {
-      fetchAllAnimes(page).then((res) => {
-        setData([...data, ...res]);
-        page++;
-      });
+      if (anime) {
+        fetchAllAnimes(page).then((res) => {
+          setData([...data, ...res]);
+          page++;
+        });
+      }
+      if (manga) {
+        fetchAllMangas(page).then((res) => {
+          setData([...data, ...res]);
+          page++;
+        });
+      }
+      if (genre) {
+        fetchGenre(page, genreId!).then((res) => {
+          setData([...data, ...res]);
+          page++;
+        });
+      }
     }
   }, [inView, data]);
 
   return (
     <>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-        {data}
+        {data.map((item: any, index: number) => (
+          <AnimeCard key={item.id} manga={item} index={index} />
+        ))}
       </section>
       <section className="flex justify-center items-center w-full">
         <div ref={ref}>
           <Image
-            src="./spinner.svg"
+            src={spinnerImage}
             alt="загрузка"
             width={56}
             height={56}

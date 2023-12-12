@@ -1,6 +1,6 @@
 "use server";
 
-import AnimeCard from "@/components/AnimeCard";
+import AnimeCard from "@/components/Card";
 import { AnimeProp, MangaProp } from "@/lib/types";
 
 export const fetchAllAnimes = async (page: number) => {
@@ -32,6 +32,17 @@ export const fetchSimilar = async (id: string) => {
   ));
 }
 
+export const fetchSimilarManga = async (id: string) => {
+  const response = await fetch(
+    `https://shikimori.one/api/mangas/${id}/similar`
+  );
+
+  const data = await response.json();
+  return data.slice(0, 4).map((item: AnimeProp, index: number) => (
+    <AnimeCard key={item.id} anime={item} index={index} />
+  ));
+}
+
 export const fetchGenre = async (page: number, id: string) => {
   const response = await fetch(
     `https://shikimori.one/api/animes?page=${page}&limit=8&genre=${id}`
@@ -39,9 +50,7 @@ export const fetchGenre = async (page: number, id: string) => {
 
   const data = await response.json();
 
-  return data.map((item: AnimeProp, index: number) => (
-    <AnimeCard key={item.id} anime={item} index={index} />
-  ));
+  return data;
 }
 
 export const fetchAllGenres = async () => {
@@ -57,6 +66,16 @@ export const fetchAllGenres = async () => {
 export const fetchAllMangas = async (page: number) => {
   const response = await fetch(
     `https://shikimori.one/api/mangas?page=${page}&limit=8&order=popularity`
+  );
+
+  const data = await response.json();
+
+  return data;
+}
+
+export const fetchManga = async (id: string) => {
+  const response = await fetch(
+    `https://shikimori.one/api/mangas/${id}`
   );
 
   const data = await response.json();

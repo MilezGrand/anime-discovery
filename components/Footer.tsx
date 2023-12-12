@@ -1,6 +1,8 @@
 import Image from "next/image";
 import logoImage from '../public/logo.svg';
-
+import instagramImage from '../public/instagram.svg'
+import twitterImage from '../public/twitter.svg'
+import tiktokImage from '../public/tiktok.svg'
 
 function Footer() {
   return (
@@ -15,21 +17,21 @@ function Footer() {
       />
       <div className="flex items-center gap-6">
         <Image
-          src="./tiktok.svg"
+          src={tiktokImage}
           alt="logo"
           width={19}
           height={19}
           className="object-contain"
         />
         <Image
-          src="./instagram.svg"
+          src={instagramImage}
           alt="logo"
           width={19}
           height={19}
           className="object-contain"
         />
         <Image
-          src="./twitter.svg"
+          src={twitterImage}
           alt="logo"
           width={19}
           height={19}

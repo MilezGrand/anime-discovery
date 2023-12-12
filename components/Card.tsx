@@ -18,7 +18,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-function AnimeCard({ anime, manga, index }: Prop) {
+function Card({ anime, manga, index }: Prop) {
   return (
     <MotionDiv
       variants={variants}
@@ -27,7 +27,7 @@ function AnimeCard({ anime, manga, index }: Prop) {
       transition={{ delay: index * 0.25, ease: "easeInOut", duration: 0.5 }}
       className="max-w-sm rounded relative w-full"
     >
-      <Link href={`/anime/${anime ? anime!.id : manga!.id}`}>
+      <Link href={anime? `/anime/${anime.id}` : `/manga/${manga!.id}`}>
         <div className="relative w-full h-[37vh]">
           <Image
             src={`https://shikimori.one${anime ? anime!.image.original : manga!.image.original}`}
@@ -77,4 +77,4 @@ function AnimeCard({ anime, manga, index }: Prop) {
   );
 }
 
-export default AnimeCard;
+export default Card;

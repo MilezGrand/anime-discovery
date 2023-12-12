@@ -1,4 +1,4 @@
-import AnimeCard from "@/components/AnimeCard";
+import AnimeCard from "@/components/Card";
 import LoadMore from "@/components/LoadMore";
 import { fetchAllAnimes } from "@/lib/actions";
 import { AnimeProp } from "@/lib/types";
@@ -14,7 +14,7 @@ async function AnimePage() {
           <AnimeCard key={item.id} anime={item} index={index} />
         ))}
       </section>
-      <LoadMore />
+      <LoadMore anime/>
     </main>
   );
 }
