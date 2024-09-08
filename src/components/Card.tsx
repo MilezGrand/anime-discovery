@@ -1,39 +1,42 @@
 import Image from "next/image";
 
-import { MotionDiv } from "./MotionDiv";
+import { MotionDiv } from "@atoms/MotionDiv";
 import Link from "next/link";
-import { IAnime, IManga } from "@/lib/types";
 
-import episodesImage from '../public/episodes.svg'
-import starImage from '../public/star.svg'
+import episodesImage from "@public/episodes.svg";
+import starImage from "@public/star.svg";
+import { animeType, mangaType } from "@/types";
+import Icon from "@/atoms/Icon";
 
-interface CardProp {
-  anime?: IAnime;
-  manga?: IManga;
+type propsType = {
+  anime?: animeType;
+  manga?: mangaType;
   index: number;
-}
+};
 
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
 };
 
-function Card({ anime, manga, index }: CardProp) {
+function Card({ anime, manga, index }: propsType) {
   return (
     <MotionDiv
       variants={variants}
       initial="hidden"
       animate="visible"
-      transition={{ delay: index * 0.25, ease: "easeInOut", duration: 0.5 }}
-      className="max-w-sm rounded relative w-full"
+      transition={{ delay: index * 0.15, ease: "easeInOut", duration: 0.5 }}
+      className="max-w-sm rounded-sm relative w-full"
     >
       <Link href={anime ? `/anime/${anime.id}` : `/manga/${manga!.id}`}>
-        <div className="relative w-full h-[37vh]">
+        <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
           <Image
-            src={`https://shikimori.one${anime ? anime!.image.original : manga!.image.original}`}
+            src={`https://shikimori.one${
+              anime ? anime!.image.original : manga!.image.original
+            }`}
             alt={anime ? anime!.russian : manga!.russian}
             fill
-            className="rounded-xl"
+            className="rounded-xl "
           />
         </div>
         <div className="py-4 flex flex-col gap-3">
@@ -49,11 +52,10 @@ function Card({ anime, manga, index }: CardProp) {
           </div>
           <div className="flex gap-4 items-center">
             <div className="flex flex-row gap-2 items-center">
-              <Image
+              <Icon
                 src={episodesImage}
                 alt="episodes"
-                width={20}
-                height={20}
+                size={20}
                 className="object-contain"
               />
               <p className="text-base text-white font-bold">
@@ -61,14 +63,15 @@ function Card({ anime, manga, index }: CardProp) {
               </p>
             </div>
             <div className="flex flex-row gap-2 items-center">
-              <Image
+              <Icon
                 src={starImage}
                 alt="star"
-                width={18}
-                height={18}
+                size={18}
                 className="object-contain"
               />
-              <p className="text-base font-bold text-[#FFAD49]">{anime ? anime!.score : manga!.score}</p>
+              <p className="text-base font-bold text-[#FFAD49]">
+                {anime ? anime!.score : manga!.score}
+              </p>
             </div>
           </div>
         </div>

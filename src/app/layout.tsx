@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import HeaderView from "@/views/HeaderView";
+import FooterView from "@views/FooterView";
 
 import "./globals.css";
 
@@ -22,9 +22,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ru">
       <body className={dmSans.className}>
         <main className="max-w-7xl mx-auto bg-[#1f2330]">
-          <Header />
+          <HeaderView />
           {children}
-          <Footer />
+          <FooterView />
         </main>
       </body>
     </html>

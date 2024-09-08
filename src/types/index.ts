@@ -1,4 +1,4 @@
-export interface IAnime {
+export type animeType = {
   id: string;
   russian: string;
   image: {
@@ -24,7 +24,7 @@ export interface IAnime {
   }[];
 }
 
-export interface IManga {
+export type mangaType = {
   id: string;
   russian: string;
   image: {
@@ -49,7 +49,7 @@ export interface IManga {
   }[];
 }
 
-export interface IGenre {
+export type genreType = {
   id: number;
   name: string;
   russian: string;

@@ -1,26 +1,26 @@
 "use client";
 import { fetchAllAnimes, fetchAllMangas, fetchGenre } from "@/lib/actions";
-import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import AnimeCard from "./Card";
+import Card from "./Card";
 
-import spinnerImage from '@/public/spinner.svg'
+import spinnerImage from "@public/spinner.svg";
+import Icon from "@/atoms/Icon";
 
 let page = 2;
 
-interface LoadMoreProp {
+type propsType = {
   anime?: boolean;
   manga?: boolean;
   genre?: boolean;
   genreId?: string;
-}
+};
 
-export type AnimeCard = JSX.Element;
+export type Card = JSX.Element;
 
-const LoadMore = ({ anime, manga, genre, genreId }: LoadMoreProp) => {
+const LoadMore = ({ anime, manga, genre, genreId }: propsType) => {
   const { ref, inView } = useInView();
-  const [data, setData] = React.useState<AnimeCard[]>([]);
+  const [data, setData] = React.useState<Card[]>([]);
 
   React.useEffect(() => {
     if (inView) {
@@ -49,22 +49,21 @@ const LoadMore = ({ anime, manga, genre, genreId }: LoadMoreProp) => {
     <>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
         {data.map((item: any, index: number) => (
-          <AnimeCard key={item.id} manga={item} index={index} />
+          <Card key={item.id} manga={item} index={index} />
         ))}
       </section>
       <section className="flex justify-center items-center w-full">
         <div ref={ref}>
-          <Image
+          <Icon
             src={spinnerImage}
-            alt="загрузка"
-            width={56}
-            height={56}
+            alt="loading..."
+            size={58}
             className="object-contain"
           />
         </div>
       </section>
     </>
   );
-}
+};
 
 export default LoadMore;
