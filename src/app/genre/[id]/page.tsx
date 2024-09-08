@@ -1,4 +1,4 @@
-import Card from "@components/Card";
+import CardView from "@views/CardView";
 import LoadMore from "@components/LoadMore";
 import { fetchAllGenres, fetchGenre } from "@lib/actions";
 import { genreType } from "@/types";
@@ -23,7 +23,7 @@ const GenrePage = async ({ params }: GenrePageProps) => {
       </h2>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 justify-center">
         {data.map((item: any, index: number) => (
-          <Card key={item.id} manga={item} index={index} />
+          <CardView key={item.id} manga={item} index={index} />
         ))}
       </section>
       <LoadMore genre genreId={id} />

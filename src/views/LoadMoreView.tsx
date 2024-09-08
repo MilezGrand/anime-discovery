@@ -2,7 +2,7 @@
 import { fetchAllAnimes, fetchAllMangas, fetchGenre } from "@/lib/actions";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import Card from "./Card";
+import CardView from "@views/CardView";
 
 import spinnerImage from "@public/spinner.svg";
 import Icon from "@/atoms/Icon";
@@ -16,11 +16,9 @@ type propsType = {
   genreId?: string;
 };
 
-export type Card = JSX.Element;
-
-const LoadMore = ({ anime, manga, genre, genreId }: propsType) => {
+const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
   const { ref, inView } = useInView();
-  const [data, setData] = React.useState<Card[]>([]);
+  const [data, setData] = React.useState<JSX.Element[]>([]);
 
   React.useEffect(() => {
     if (inView) {
@@ -48,8 +46,17 @@ const LoadMore = ({ anime, manga, genre, genreId }: propsType) => {
   return (
     <>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-        {data.map((item: any, index: number) => (
-          <Card key={item.id} manga={item} index={index} />
+        {data.map((manga: any, index: number) => (
+          <CardView
+            key={manga.id}
+            episodes={manga.volumes}
+            id={manga.id}
+            name={manga.russian}
+            imageUrl={manga.image.original}
+            score={manga.score}
+            kind={manga.kind}
+            index={index}
+          />
         ))}
       </section>
       <section className="flex justify-center items-center w-full">
@@ -66,4 +73,4 @@ const LoadMore = ({ anime, manga, genre, genreId }: propsType) => {
   );
 };
 
-export default LoadMore;
+export default LoadMoreView;

@@ -27,7 +27,6 @@
       "@templates/*": ["./src/templates/*"],
       "@views/*": ["./src/views/*"],
       "@types/*": ["./src/types/*"],
-      "@components/*": ["./src/components/*"],
       "@lib/*": ["./src/lib/*"],
     }
   },
