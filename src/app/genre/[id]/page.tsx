@@ -22,8 +22,8 @@ const GenrePage = async ({ params }: GenrePageProps) => {
         Аниме жанра {genre[0].russian}
       </h2>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 justify-center">
-        {data.map((item: any, index: number) => (
-          <CardView key={item.id} manga={item} index={index} />
+        {data.map((item: any) => (
+          <CardView key={item.id} manga={item} />
         ))}
       </section>
       <LoadMoreView genre genreId={id} />
