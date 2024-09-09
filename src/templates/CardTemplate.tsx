@@ -12,13 +12,7 @@ type propsType = {
   score: string;
 };
 
-function CardTemplate({
-  imageUrl,
-  name,
-  kind,
-  episodes,
-  score,
-}: propsType) {
+function CardTemplate({ imageUrl, name, kind, episodes, score }: propsType) {
   return (
     <>
       <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
@@ -39,15 +33,17 @@ function CardTemplate({
           </div>
         </div>
         <div className="flex gap-4 items-center">
-          <div className="flex flex-row gap-2 items-center">
-            <Icon
-              src={episodesImage}
-              alt="episodes"
-              size={20}
-              className="object-contain"
-            />
-            <p className="text-base text-white font-bold">{episodes}</p>
-          </div>
+          {episodes !== 0 && (
+            <div className="flex flex-row gap-2 items-center">
+              <Icon
+                src={episodesImage}
+                alt="episodes"
+                size={20}
+                className="object-contain"
+              />
+              <p className="text-base text-white font-bold">{episodes}</p>
+            </div>
+          )}
           <div className="flex flex-row gap-2 items-center">
             <Icon
               src={starImage}

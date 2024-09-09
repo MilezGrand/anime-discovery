@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { fetchAllAnimes, fetchAllMangas, fetchGenre } from "@/lib/actions";
 import React from "react";
 import { useInView } from "react-intersection-observer";
@@ -18,7 +18,7 @@ type propsType = {
 
 const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
   const { ref, inView } = useInView();
-  const [data, setData] = React.useState<JSX.Element[]>([]);
+  const [data, setData] = React.useState<any>([]);
 
   React.useEffect(() => {
     if (inView) {
@@ -46,7 +46,7 @@ const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
   return (
     <>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-        {data.map((manga: any, index: number) => (
+        {data.map((manga: any) => (
           <CardView
             key={manga.id}
             episodes={manga.volumes}
@@ -55,7 +55,7 @@ const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
             imageUrl={manga.image.original}
             score={manga.score}
             kind={manga.kind}
-            index={index}
+            isAnime={anime}
           />
         ))}
       </section>

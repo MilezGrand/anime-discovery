@@ -8,26 +8,26 @@ export const fetchAllAnimes = async (page: number) => {
     `https://shikimori.one/api/animes?page=${page}&limit=8&order=popularity`
   );
 
-  const data = await response.json();
+  const data: animeType[] = await response.json();
   return data;
 };
 
 export const fetchAnime = async (id: string) => {
   const response = await fetch(`https://shikimori.one/api/animes/${id}`);
-  const data = await response.json();
+  const data: animeType = await response.json();
 
   return data;
 };
 
-export const fetchSimilar = async (id: string) => {
+export const fetchSimilarAnimes = async (id: string) => {
   const response = await fetch(
     `https://shikimori.one/api/animes/${id}/similar`
   );
 
-  const data = await response.json();
+  const data: animeType[] = await response.json();
   return data
     .slice(0, 4)
-    .map((anime: animeType, index: number) => (
+    .map((anime) => (
       <CardView
         isAnime
         key={anime.id}
@@ -37,20 +37,19 @@ export const fetchSimilar = async (id: string) => {
         imageUrl={anime.image.original}
         score={anime.score}
         kind={anime.kind}
-        index={index}
       />
     ));
 };
 
-export const fetchSimilarManga = async (id: string) => {
+export const fetchSimilarMangas = async (id: string) => {
   const response = await fetch(
     `https://shikimori.one/api/mangas/${id}/similar`
   );
 
-  const data = await response.json();
+  const data: mangaType[] = await response.json();
   return data
     .slice(0, 4)
-    .map((manga: mangaType, index: number) => (
+    .map((manga) => (
       <CardView
         key={manga.id}
         episodes={manga.volumes}
@@ -59,7 +58,6 @@ export const fetchSimilarManga = async (id: string) => {
         imageUrl={manga.image.original}
         score={manga.score}
         kind={manga.kind}
-        index={index}
       />
     ));
 };
@@ -87,7 +85,7 @@ export const fetchAllMangas = async (page: number) => {
     `https://shikimori.one/api/mangas?page=${page}&limit=8&order=popularity`
   );
 
-  const data = await response.json();
+  const data: mangaType[] = await response.json();
 
   return data;
 };
@@ -95,7 +93,7 @@ export const fetchAllMangas = async (page: number) => {
 export const fetchManga = async (id: string) => {
   const response = await fetch(`https://shikimori.one/api/mangas/${id}`);
 
-  const data = await response.json();
+  const data: mangaType = await response.json();
 
   return data;
 };

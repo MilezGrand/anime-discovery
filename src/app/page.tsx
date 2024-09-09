@@ -3,7 +3,7 @@ import { fetchAllAnimes, fetchAllMangas } from "@lib/actions";
 import CardView from "@views/CardView";
 import { animeType, mangaType } from "@/types";
 
-const Home = async () => {
+async function Home() {
   const animes = await fetchAllAnimes(1);
   const mangas = await fetchAllMangas(1);
 
@@ -14,7 +14,7 @@ const Home = async () => {
       </h2>
 
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 items-start self-center">
-        {animes.slice(0, 7).map((anime: animeType, index: number) => (
+        {animes.slice(0, 7).map((anime: animeType) => (
           <CardView
             isAnime
             key={anime.id}
@@ -24,7 +24,6 @@ const Home = async () => {
             imageUrl={anime.image.original}
             score={anime.score}
             kind={anime.kind}
-            index={index}
           />
         ))}
         <Link href="/anime">
@@ -39,7 +38,7 @@ const Home = async () => {
       </h2>
 
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 items-start self-center">
-        {mangas.slice(0, 7).map((manga: mangaType, index: number) => (
+        {mangas.slice(0, 7).map((manga: mangaType) => (
           <CardView
             key={manga.id}
             episodes={manga.volumes}
@@ -48,7 +47,6 @@ const Home = async () => {
             imageUrl={manga.image.original}
             score={manga.score}
             kind={manga.kind}
-            index={index}
           />
         ))}
         <Link href="/manga">
@@ -59,6 +57,6 @@ const Home = async () => {
       </section>
     </section>
   );
-};
+}
 
 export default Home;

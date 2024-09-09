@@ -1,5 +1,5 @@
 import CardView from "@views/CardView";
-import LoadMore from "@components/LoadMore";
+import LoadMoreView from "@views/LoadMoreView";
 import { fetchAllGenres, fetchGenre } from "@lib/actions";
 import { genreType } from "@/types";
 
@@ -26,7 +26,7 @@ const GenrePage = async ({ params }: GenrePageProps) => {
           <CardView key={item.id} manga={item} index={index} />
         ))}
       </section>
-      <LoadMore genre genreId={id} />
+      <LoadMoreView genre genreId={id} />
     </main>
   );
 };

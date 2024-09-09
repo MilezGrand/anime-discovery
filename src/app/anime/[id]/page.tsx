@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { fetchAnime, fetchSimilar } from "../../../lib/actions";
+import { fetchAnime, fetchSimilarAnimes } from "@lib/actions";
 import { animeType } from "@/types";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ interface AnimeCardPageProps {
 const AnimeCardPage = async ({ params }: AnimeCardPageProps) => {
   const id = params.id;
   const data: animeType = await fetchAnime(id);
-  const similarAnimes = await fetchSimilar(id);
+  const similarAnimes = await fetchSimilarAnimes(id);
 
   const airedDate = new Date(data.aired_on).toLocaleDateString("ru-RU", {
     year: "numeric",

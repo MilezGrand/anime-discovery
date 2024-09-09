@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { fetchManga, fetchSimilarManga } from "../../../lib/actions";
-import { mangaType } from "@/types";
+import { fetchManga, fetchSimilarMangas } from "@lib/actions";
 
 interface MangaCardPageProps {
   params: { id: string };
@@ -9,8 +8,8 @@ interface MangaCardPageProps {
 
 const MangaCardPage = async ({ params }: MangaCardPageProps) => {
   const id = params.id;
-  const manga: mangaType = await fetchManga(id);
-  const similarAnimes = await fetchSimilarManga(id);
+  const manga = await fetchManga(id);
+  const similarAnimes = await fetchSimilarMangas(id);
 
   const airedDate = new Date(manga.aired_on).toLocaleDateString("ru-RU", {
     year: "numeric",
