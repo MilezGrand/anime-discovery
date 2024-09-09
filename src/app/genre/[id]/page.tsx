@@ -31,6 +31,7 @@ const GenrePage = async ({ params }: GenrePageProps) => {
             imageUrl={item.image.original}
             score={item.score}
             kind={item.kind}
+            isAnime
           />
         ))}
       </section>
