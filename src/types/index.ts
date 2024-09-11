@@ -12,7 +12,7 @@ export type animeType = {
   description: string;
   aired_on: string;
   released_on: string;
-  rating: string;
+  rating: 'none' | 'g' | 'pg' | 'pg_13' | 'r' | 'r_plus' | 'rx';
   duration: number;
   genres: {
     id: number;
