@@ -3,11 +3,21 @@ import React from "react";
 import Image from "next/image";
 import episodesImage from "@public/episodes.svg";
 import starImage from "@public/star.svg";
+import { ANIME_KIND } from "@/constants/kind";
 
 type propsType = {
   imageUrl: string;
   name: string;
-  kind: string;
+  kind:
+    | "tv"
+    | "movie"
+    | "ova"
+    | "ona"
+    | "special"
+    | "music"
+    | "tv_13"
+    | "tv_24"
+    | "tv_48";
   episodes: number;
   score: string;
 };
@@ -29,7 +39,9 @@ function CardTemplate({ imageUrl, name, kind, episodes, score }: propsType) {
             {name}
           </h2>
           <div className="py-1 px-2 bg-[#161921] rounded-sm absolute right-2 bottom-28">
-            <p className="text-white text-sm font-bold capitalize">{kind}</p>
+            <p className="text-white text-sm font-bold capitalize">
+              {ANIME_KIND[kind]}
+            </p>
           </div>
         </div>
         <div className="flex gap-4 items-center">

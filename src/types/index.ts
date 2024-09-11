@@ -5,14 +5,23 @@ export type animeType = {
     original: string;
     preview: string;
   };
-  kind: string;
+  kind:
+    | "tv"
+    | "movie"
+    | "ova"
+    | "ona"
+    | "special"
+    | "music"
+    | "tv_13"
+    | "tv_24"
+    | "tv_48";
   episodes: number;
   episodes_aired: number;
   score: string;
   description: string;
   aired_on: string;
   released_on: string;
-  rating: 'none' | 'g' | 'pg' | 'pg_13' | 'r' | 'r_plus' | 'rx';
+  rating: "none" | "g" | "pg" | "pg_13" | "r" | "r_plus" | "rx";
   duration: number;
   genres: {
     id: number;
@@ -22,7 +31,7 @@ export type animeType = {
     id: number;
     image: string;
   }[];
-}
+};
 
 export type mangaType = {
   id: string;
@@ -47,7 +56,7 @@ export type mangaType = {
     id: number;
     name: string;
   }[];
-}
+};
 
 export type genreType = {
   id: number;
@@ -55,4 +64,4 @@ export type genreType = {
   russian: string;
   kind: string;
   entry_type: string;
-}
+};
