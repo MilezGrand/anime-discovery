@@ -3,6 +3,8 @@ import Image from "next/image";
 import { fetchAnime, fetchSimilarAnimes } from "@lib/actions";
 import { animeType } from "@/types";
 import Link from "next/link";
+import { RATING } from "@/constants/rating";
+import { ANIME_KIND } from "@/constants/kind";
 
 interface AnimeCardPageProps {
   params: { id: string };
@@ -18,11 +20,13 @@ const AnimeCardPage = async ({ params }: AnimeCardPageProps) => {
     month: "long",
     day: "numeric",
   });
+
   const releasedDate = new Date(data.released_on).toLocaleDateString("ru-RU", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
   const clearDescription = data.description
     ? data.description
         .replace(/{.*?}/g, "")
@@ -33,75 +37,76 @@ const AnimeCardPage = async ({ params }: AnimeCardPageProps) => {
 
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
-      <h2 className="text-3xl text-white font-bold">{data.russian}</h2>
       <div>
-        <section className="sm:grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 flex flex-col gap-10">
-          <div className="relative w-full ">
+        <section className="sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 grid-cols-1 md:gap-4 lg:gap-8">
+          <div className="md:col-span-1 lg:col-span-1">
             <Image
               src={`https://shikimori.one${data.image.original}`}
               alt={id}
               className="rounded-xl"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
             />
           </div>
 
-          <ul>
-            <li className="text-gray-400 pb-2">
-              Тип: <span className="text-white">{data.kind.toUpperCase()}</span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Эпизоды:{" "}
-              <span className="text-white">
-                {data.episodes_aired} / {data.episodes}
-              </span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Длительность эпизода:{" "}
-              <span className="text-white">{data.duration} мин.</span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Даты:{" "}
-              <span className="text-white">
-                с {airedDate} по {releasedDate}
-              </span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Жанры:{" "}
-              <span className="text-white">
-                {data.genres.map((genre) => (
-                  <Link
-                    href={`/genre/${genre.id}`}
-                    key={genre.id}
-                    className={`hover:text-blue-500 underline pr-1`}
-                  >
-                    {genre.russian}
-                  </Link>
-                ))}
-              </span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Рейтинг:{" "}
-              <span className="text-white">
-                {data.rating.toUpperCase().replace("_", "-")}
-              </span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Оценка: <span className="text-white">{data.score}</span>
-            </li>
-            <li className="text-gray-400 pb-2">Студия: </li>
-            <Image
-              src={`https://shikimori.one${data.studios[0].image}`}
-              alt={id}
-              className="rounded-xl"
-              width={200}
-              height={200}
-            />
-          </ul>
+          <div className="lg:col-span-3 md:col-span-2 sm:col-span-1">
+            <div>
+              <h2 className="text-3xl text-white font-bold mb-1">
+                {data.russian}
+                <span className="text-gray-600 text-xl ml-3">
+                  {RATING[data.rating]}
+                </span>
+              </h2>
+            </div>
+
+            <table className="text-lg border-separate md:border-spacing-y-4 ">
+              <tbody >
+                <tr className="mb-6">
+                  <td className="text-gray-400">Тип</td>
+                  <td className="ml-2">{ANIME_KIND[data.kind]}</td>
+                </tr>
+                <tr>
+                  <td className="text-gray-400">Эпизоды</td>
+                  <td>
+                    {data.episodes_aired} / {data.episodes}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-gray-400">Длительность эпизода</td>
+                  <td>{data.duration} мин.</td>
+                </tr>
+                <tr>
+                  <td className="text-gray-400">Даты</td>
+                  <td>
+                    с {airedDate} по {releasedDate}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-gray-400">Жанры</td>
+                  <td className="truncate">
+                    {data.genres.map((genre) => (
+                      <Link
+                        href={`/genre/${genre.id}`}
+                        key={genre.id}
+                        className={`hover:text-blue-500 underline pr-1`}
+                      >
+                        {genre.russian}
+                      </Link>
+                    ))}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="text-gray-400">Оценка</td>
+                  <td>{data.score}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section>
-          <p className="text-gray-400 pb-2 pt-5">Описание:</p>
+          <p className="text-gray-400 pb-2 pt-5 text-lg ">Описание:</p>
           {clearDescription}
         </section>
 
