@@ -1,21 +1,13 @@
 import { MotionDiv } from "@atoms/MotionDiv";
 import Link from "next/link";
 import CardTemplate from "@/templates/CardTemplate";
+import { animeKindType, mangaKindType } from "@/types";
 
 type propsType = {
   id: string;
   imageUrl: string;
   name: string;
-  kind:
-    | "tv"
-    | "movie"
-    | "ova"
-    | "ona"
-    | "special"
-    | "music"
-    | "tv_13"
-    | "tv_24"
-    | "tv_48";
+  kind: animeKindType | mangaKindType;
   episodes: number;
   score: string;
   isAnime?: boolean;
@@ -48,7 +40,7 @@ function CardView({
       className="max-w-sm rounded-sm relative w-full"
     >
       <Link href={`/${isAnime ? "anime" : "manga"}/${id}`}>
-        <CardTemplate {...{ id, imageUrl, name, kind, episodes, score }} />
+        <CardTemplate {...{ id, imageUrl, name, kind, episodes, score, isAnime }} />
       </Link>
     </MotionDiv>
   );

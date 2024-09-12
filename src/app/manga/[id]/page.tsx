@@ -1,99 +1,78 @@
 import React from "react";
 import Image from "next/image";
 import { fetchManga, fetchSimilarMangas } from "@lib/actions";
+import { clearDescription, localizeDate } from "@/utils";
+import { RATING } from "@/constants/rating";
+import { MANGA_KIND } from "@/constants/kind";
 
-interface MangaCardPageProps {
+type propsType = {
   params: { id: string };
-}
+};
 
-const MangaCardPage = async ({ params }: MangaCardPageProps) => {
+const MangaCardPage = async ({ params }: propsType) => {
   const id = params.id;
   const manga = await fetchManga(id);
-  const similarAnimes = await fetchSimilarMangas(id);
+  const similarMangas = await fetchSimilarMangas(id);
 
-  const airedDate = new Date(manga.aired_on).toLocaleDateString("ru-RU", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const clearDescription = manga.description
-    ? manga.description
-        .replace(/{.*?}/g, "")
-        .replace(/\[.*?\]/g, "")
-        .replace("[", "")
-        .replace("]", "")
-    : "Отсутствует";
+  const airedDate = localizeDate(manga.aired_on);
+  const description = clearDescription(manga.description);
 
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
-      <h2 className="text-3xl text-white font-bold">{manga.russian}</h2>
       <div>
-        <section className="sm:grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 flex flex-col gap-10">
-          <div className="relative w-full ">
+        <div className="sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 grid-cols-1 md:gap-4 lg:gap-8">
+          <div className="md:col-span-1 lg:col-span-1">
             <Image
-              src={`https://shikimori.one${manga.image?.original}`}
+              src={`https://shikimori.one${manga.image.original}`}
               alt={id}
               className="rounded-xl"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
             />
           </div>
 
-          <ul>
-            <li className="text-gray-400 pb-2">
-              Тип:{" "}
-              <span className="text-white">{manga.kind.toUpperCase()}</span>
-            </li>
-            {manga.chapters != 0 && (
-              <li className="text-gray-400 pb-2">
-                Главы: <span className="text-white">{manga.chapters}</span>
-              </li>
-            )}
-            {manga.volumes != 0 && (
-              <li className="text-gray-400 pb-2">
-                Тома: <span className="text-white">{manga.volumes}</span>
-              </li>
-            )}
-            <li className="text-gray-400 pb-2">
-              Дата выхода: <span className="text-white">{airedDate} </span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Жанры:{" "}
-              <span className="text-white">
-                {manga.genres.map((genre) => genre.russian + " ")}
-              </span>
-            </li>
-            {manga.rating && (
-              <li className="text-gray-400 pb-2">
-                Рейтинг:{" "}
-                <span className="text-white">
-                  {manga?.rating?.toUpperCase().replace("_", "-")}
+          <div className="lg:col-span-3 md:col-span-2 sm:col-span-1">
+            <div className="mb-4">
+              <h2 className="text-3xl text-white font-bold mb-1">
+                {manga.russian}
+                <span className="text-gray-600 text-xl ml-3">
+                  {RATING[manga.rating]}
                 </span>
-              </li>
-            )}
-            <li className="text-gray-400 pb-2">
-              Оценка: <span className="text-white">{manga.score}</span>
-            </li>
-            <li className="text-gray-400 pb-2">
-              Издатель:{" "}
-              <span className="text-white">{manga.publishers[0].name}</span>
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <p className="text-gray-400 pb-2 pt-5">Описание:</p>
-          {clearDescription}
-        </section>
-
-        {similarAnimes ? (
-          <section>
-            <h2 className="text-3xl text-white font-bold my-4">Похожее:</h2>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 justify-center">
-              {similarAnimes}
+              </h2>
             </div>
-          </section>
-        ) : null}
+
+            <div className="flex gap-8 text-lg">
+              <div className="flex flex-col gap-4">
+                <div className="text-gray-400">Тип</div>
+                <div className="text-gray-400">Тома</div>
+                <div className="text-gray-400">Главы</div>
+                <div className="text-gray-400">Дата выхода</div>
+                <div className="text-gray-400">Жанры</div>
+                <div className="text-gray-400">Оценка</div>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div>{MANGA_KIND[manga.kind]}</div>
+                <div>{manga.volumes}</div>
+                <div>{manga.chapters}</div>
+                <div>{airedDate}</div>
+                <div>{manga.genres.map((genre) => genre.russian + " ")}</div>
+                <div>{manga.score}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="text-gray-400 pb-2 pt-5 text-lg ">Описание:</div>
+          <div className="text-lg">{description}</div>
+        </div>
+
+        <div>
+          <h2 className="text-3xl text-white font-bold my-4">Похожая манга:</h2>
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 justify-center">
+            {similarMangas}
+          </div>
+        </div>
       </div>
     </main>
   );

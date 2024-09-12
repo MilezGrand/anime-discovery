@@ -1,3 +1,21 @@
+export type animeKindType =
+  | "tv"
+  | "movie"
+  | "ova"
+  | "ona"
+  | "special"
+  | "music"
+  | "tv_13"
+  | "tv_24"
+  | "tv_48";
+
+export type mangaKindType =
+  | "manga"
+  | "manhwa"
+  | "manhua"
+  | "one_shot"
+  | "doujin";
+
 export type animeType = {
   id: string;
   russian: string;
@@ -5,16 +23,7 @@ export type animeType = {
     original: string;
     preview: string;
   };
-  kind:
-    | "tv"
-    | "movie"
-    | "ova"
-    | "ona"
-    | "special"
-    | "music"
-    | "tv_13"
-    | "tv_24"
-    | "tv_48";
+  kind: animeKindType;
   episodes: number;
   episodes_aired: number;
   score: string;
@@ -40,14 +49,14 @@ export type mangaType = {
     original: string;
     preview: string;
   };
-  kind: string;
+  kind: mangaKindType;
   chapters: number;
   volumes: number;
   score: string;
   description: string;
   released_on: string;
   aired_on: string;
-  rating: string;
+  rating: "none" | "g" | "pg" | "pg_13" | "r" | "r_plus" | "rx";
   genres: {
     id: number;
     russian: string;

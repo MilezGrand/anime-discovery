@@ -3,26 +3,26 @@ import React from "react";
 import Image from "next/image";
 import episodesImage from "@public/episodes.svg";
 import starImage from "@public/star.svg";
-import { ANIME_KIND } from "@/constants/kind";
+import { ANIME_KIND, MANGA_KIND } from "@/constants/kind";
+import { animeKindType, mangaKindType } from "@/types";
 
 type propsType = {
   imageUrl: string;
   name: string;
-  kind:
-    | "tv"
-    | "movie"
-    | "ova"
-    | "ona"
-    | "special"
-    | "music"
-    | "tv_13"
-    | "tv_24"
-    | "tv_48";
+  kind: animeKindType | mangaKindType;
   episodes: number;
   score: string;
+  isAnime: boolean;
 };
 
-function CardTemplate({ imageUrl, name, kind, episodes, score }: propsType) {
+function CardTemplate({
+  imageUrl,
+  name,
+  kind,
+  episodes,
+  score,
+  isAnime,
+}: propsType) {
   return (
     <>
       <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
@@ -40,7 +40,9 @@ function CardTemplate({ imageUrl, name, kind, episodes, score }: propsType) {
           </h2>
           <div className="py-1 px-2 bg-[#161921] rounded-sm absolute right-2 bottom-28">
             <p className="text-white text-sm font-bold capitalize">
-              {ANIME_KIND[kind]}
+              {isAnime
+                ? ANIME_KIND[kind as animeKindType]
+                : MANGA_KIND[kind as mangaKindType]}
             </p>
           </div>
         </div>
