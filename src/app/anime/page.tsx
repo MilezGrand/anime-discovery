@@ -19,6 +19,7 @@ async function AnimePage() {
             imageUrl={manga.image.original}
             score={manga.score}
             kind={manga.kind}
+            isAnime
           />
         ))}
       </section>

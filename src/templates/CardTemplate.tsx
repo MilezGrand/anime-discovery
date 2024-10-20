@@ -4,13 +4,13 @@ type propsType = {
   poster: ReactNode;
   episodes: ReactNode;
   score: ReactNode;
-  name: string;
-  kind: string;
+  name: ReactNode;
+  kind: ReactNode;
 };
 
 function CardTemplate({ poster, name, kind, episodes, score }: propsType) {
   return (
-    <>
+    <div className="d-flex flex-col">
       <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
         {poster}
       </div>
@@ -20,7 +20,7 @@ function CardTemplate({ poster, name, kind, episodes, score }: propsType) {
             {name}
           </h2>
           <div className="py-1 px-2 bg-[#161921] rounded-sm absolute right-2 bottom-28">
-            <p className="text-white text-sm font-bold capitalize">{kind}</p>
+            <div className="text-white text-sm font-bold capitalize">{kind}</div>
           </div>
         </div>
         <div className="flex gap-4 items-center">
@@ -29,7 +29,7 @@ function CardTemplate({ poster, name, kind, episodes, score }: propsType) {
           <div className="flex flex-row gap-2 items-center">{score}</div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
