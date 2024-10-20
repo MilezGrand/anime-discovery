@@ -2,6 +2,11 @@ import { MotionDiv } from "@atoms/MotionDiv";
 import Link from "next/link";
 import CardTemplate from "@/templates/CardTemplate";
 import { animeKindType, mangaKindType } from "@/types";
+import { ANIME_KIND, MANGA_KIND } from "@/constants/kind";
+import Image from "next/image";
+import Icon from "@/atoms/Icon";
+import episodesImage from "@public/episodes.svg";
+import starImage from "@public/star.svg";
 
 type propsType = {
   id: string;
@@ -40,7 +45,46 @@ function CardView({
       className="max-w-sm rounded-sm relative w-full"
     >
       <Link href={`/${isAnime ? "anime" : "manga"}/${id}`}>
-        <CardTemplate {...{ id, imageUrl, name, kind, episodes, score, isAnime }} />
+        <CardTemplate
+          {...{ id, name, episodes, score }}
+          kind={
+            isAnime
+              ? ANIME_KIND[kind as animeKindType]
+              : MANGA_KIND[kind as mangaKindType]
+          }
+          poster={
+            <Image
+              src={`https://shikimori.one${imageUrl}`}
+              alt={name}
+              fill
+              className="rounded-xl "
+            />
+          }
+          episodes={
+            episodes !== 0 && (
+              <>
+                <Icon
+                  src={episodesImage}
+                  alt="episodes"
+                  size={20}
+                  className="object-contain"
+                />
+                <p className="text-base text-white font-bold">{episodes}</p>
+              </>
+            )
+          }
+          score={
+            <>
+              <Icon
+                src={starImage}
+                alt="star"
+                size={18}
+                className="object-contain"
+              />
+              <p className="text-base font-bold text-[#FFAD49]">{score}</p>
+            </>
+          }
+        />
       </Link>
     </MotionDiv>
   );

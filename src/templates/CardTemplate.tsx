@@ -1,37 +1,18 @@
-import Icon from "@/atoms/Icon";
-import React from "react";
-import Image from "next/image";
-import episodesImage from "@public/episodes.svg";
-import starImage from "@public/star.svg";
-import { ANIME_KIND, MANGA_KIND } from "@/constants/kind";
-import { animeKindType, mangaKindType } from "@/types";
+import React, { ReactNode } from "react";
 
 type propsType = {
-  imageUrl: string;
+  poster: ReactNode;
+  episodes: ReactNode;
+  score: ReactNode;
   name: string;
-  kind: animeKindType | mangaKindType;
-  episodes: number;
-  score: string;
-  isAnime: boolean;
+  kind: string;
 };
 
-function CardTemplate({
-  imageUrl,
-  name,
-  kind,
-  episodes,
-  score,
-  isAnime,
-}: propsType) {
+function CardTemplate({ poster, name, kind, episodes, score }: propsType) {
   return (
     <>
       <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
-        <Image
-          src={`https://shikimori.one${imageUrl}`}
-          alt={name}
-          fill
-          className="rounded-xl "
-        />
+        {poster}
       </div>
       <div className="py-4 flex flex-col gap-3">
         <div className="flex justify-between items-center gap-1">
@@ -39,34 +20,13 @@ function CardTemplate({
             {name}
           </h2>
           <div className="py-1 px-2 bg-[#161921] rounded-sm absolute right-2 bottom-28">
-            <p className="text-white text-sm font-bold capitalize">
-              {isAnime
-                ? ANIME_KIND[kind as animeKindType]
-                : MANGA_KIND[kind as mangaKindType]}
-            </p>
+            <p className="text-white text-sm font-bold capitalize">{kind}</p>
           </div>
         </div>
         <div className="flex gap-4 items-center">
-          {episodes !== 0 && (
-            <div className="flex flex-row gap-2 items-center">
-              <Icon
-                src={episodesImage}
-                alt="episodes"
-                size={20}
-                className="object-contain"
-              />
-              <p className="text-base text-white font-bold">{episodes}</p>
-            </div>
-          )}
-          <div className="flex flex-row gap-2 items-center">
-            <Icon
-              src={starImage}
-              alt="star"
-              size={18}
-              className="object-contain"
-            />
-            <p className="text-base font-bold text-[#FFAD49]">{score}</p>
-          </div>
+          <div className="flex flex-row gap-2 items-center">{episodes}</div>
+
+          <div className="flex flex-row gap-2 items-center">{score}</div>
         </div>
       </div>
     </>
