@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import { fetchAllAnimes, fetchAllMangas, fetchGenre } from "@/lib/actions";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import CardView from "@views/CardView";
-
-import spinnerImage from "@public/spinner.svg";
-import Icon from "@/atoms/Icon";
+import CardPlaceholder from "@/placeholders/CardPlaceholder";
+import { GridTemplate } from "@/templates";
 
 let page = 2;
 
@@ -45,7 +44,7 @@ const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
 
   return (
     <>
-      <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
+      <GridTemplate>
         {data.map((manga: any) => (
           <CardView
             key={manga.id}
@@ -58,17 +57,15 @@ const LoadMoreView = ({ anime, manga, genre, genreId }: propsType) => {
             isAnime={anime}
           />
         ))}
-      </section>
-      <section className="flex justify-center items-center w-full">
-        <div ref={ref}>
-          <Icon
-            src={spinnerImage}
-            alt="loading..."
-            size={58}
-            className="object-contain"
-          />
-        </div>
-      </section>
+      </GridTemplate>
+
+      <div ref={ref}>
+        <GridTemplate>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <CardPlaceholder key={index} />
+          ))}
+        </GridTemplate>
+      </div>
     </>
   );
 };
