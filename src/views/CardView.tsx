@@ -5,8 +5,6 @@ import { animeKindType, mangaKindType } from "@/types";
 import { ANIME_KIND, MANGA_KIND } from "@/constants/kind";
 import Image from "next/image";
 import Icon from "@/atoms/Icon";
-import episodesImage from "@public/episodes.svg";
-import starImage from "@public/star.svg";
 
 type propsType = {
   id: string;
@@ -64,8 +62,7 @@ function CardView({
             episodes !== 0 && (
               <>
                 <Icon
-                  src={episodesImage}
-                  alt="episodes"
+                  name="episodes"
                   size={20}
                   className="object-contain"
                 />
@@ -76,8 +73,7 @@ function CardView({
           score={
             <>
               <Icon
-                src={starImage}
-                alt="star"
+                name='star'
                 size={18}
                 className="object-contain"
               />

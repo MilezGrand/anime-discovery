@@ -1,14 +1,23 @@
-import React from 'react'
-import Image, { ImageProps } from "next/image";
+import React from "react";
+import Image from "next/image";
+import * as icons from "@public/svgs";
 
-type propsType = ImageProps &{
-  size?: number  
-}
+type propsType = {
+  name: keyof typeof icons;
+  size?: number;
+  className?: string;
+};
 
-function Icon({size = 18, ...props}: propsType) {
+function Icon({ size = 18, name, className }: propsType) {
   return (
-    <Image {...props} width={size} height={size}/>
-  )
+    <Image
+      {...{ className }}
+      src={icons[name]}
+      alt={name}
+      width={size}
+      height={size}
+    />
+  );
 }
 
-export default Icon
+export default Icon;

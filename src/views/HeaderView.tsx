@@ -1,19 +1,15 @@
-import Image from "next/image";
-
-import logoImage from "@public/logo.svg";
 import HeaderTemplate from "@/templates/HeaderTemplate";
 import Link from "next/link";
+import Icon from "@/atoms/Icon";
 
 function HeaderView() {
   return (
     <Link href="/">
       <HeaderTemplate
         logo={
-          <Image
-            src={logoImage}
-            alt="logo"
-            width={101}
-            height={96}
+          <Icon
+            name="logo"
+            size={100}
             className="object-contain"
           />
         }
