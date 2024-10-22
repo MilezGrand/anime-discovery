@@ -1,10 +1,11 @@
 import React from "react";
 import { fetchManga, fetchSimilarMangas } from "@/lib/actions";
-import { GridTemplate, MangaTemplate } from "@/templates";
+import { MangaTemplate } from "@/templates";
 import { localizeDate, clearDescription } from "@/utils";
 import Image from "next/image";
 import { MANGA_KIND } from "@/constants/kind";
 import { RATING } from "@/constants/rating";
+import SimilarMangaView from "./SimilarMangaView";
 
 type propsType = {
   mangaId: string;
@@ -12,7 +13,6 @@ type propsType = {
 
 async function MangaView({ mangaId }: propsType) {
   const manga = await fetchManga(mangaId);
-  const similarMangas = await fetchSimilarMangas(mangaId);
 
   const airedDate = localizeDate(manga.aired_on);
   const description = clearDescription(manga.description);
@@ -39,7 +39,8 @@ async function MangaView({ mangaId }: propsType) {
         score={manga.score}
         description={description}
       />
-      <GridTemplate>{similarMangas}</GridTemplate>
+
+      <SimilarMangaView mangaId={mangaId} />
     </>
   );
 }

@@ -1,6 +1,5 @@
 "use server";
 
-import CardView from "@views/CardView";
 import { animeType, mangaType } from "@/types";
 
 export const fetchAllAnimes = async (page: number) => {
@@ -25,20 +24,8 @@ export const fetchSimilarAnimes = async (id: string) => {
   );
 
   const data: animeType[] = await response.json();
-  return data
-    .slice(0, 4)
-    .map((anime) => (
-      <CardView
-        isAnime
-        key={anime.id}
-        episodes={anime.episodes}
-        id={anime.id}
-        name={anime.russian}
-        imageUrl={anime.image.original}
-        score={anime.score}
-        kind={anime.kind}
-      />
-    ));
+
+  return data;
 };
 
 export const fetchSimilarMangas = async (id: string) => {
@@ -47,19 +34,8 @@ export const fetchSimilarMangas = async (id: string) => {
   );
 
   const data: mangaType[] = await response.json();
-  return data
-    .slice(0, 4)
-    .map((manga) => (
-      <CardView
-        key={manga.id}
-        episodes={manga.volumes}
-        id={manga.id}
-        name={manga.russian}
-        imageUrl={manga.image.original}
-        score={manga.score}
-        kind={manga.kind}
-      />
-    ));
+
+  return data;
 };
 
 export const fetchGenre = async (page: number, id: string) => {

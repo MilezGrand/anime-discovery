@@ -1,11 +1,12 @@
 import React from "react";
-import { fetchAnime, fetchSimilarAnimes } from "@/lib/actions";
-import { AnimeTemplate, GridTemplate } from "@/templates";
+import { fetchAnime } from "@/lib/actions";
+import { AnimeTemplate } from "@/templates";
 import { localizeDate, clearDescription } from "@/utils";
 import Image from "next/image";
 import { RATING } from "@/constants/rating";
 import { ANIME_KIND } from "@/constants/kind";
 import Link from "next/link";
+import SimilarAnimeView from "./SimilarAnimeView";
 
 type propsType = {
   animeId: string;
@@ -13,7 +14,6 @@ type propsType = {
 
 async function AnimeView({ animeId }: propsType) {
   const data = await fetchAnime(animeId);
-  const similarAnimes = await fetchSimilarAnimes(animeId);
 
   const airedDate = localizeDate(data.aired_on);
   const releasedDate = localizeDate(data.released_on);
@@ -57,7 +57,8 @@ async function AnimeView({ animeId }: propsType) {
         description={desciption}
         score={data.score}
       />
-      <GridTemplate>{similarAnimes}</GridTemplate>
+
+      <SimilarAnimeView animeId={animeId} />
     </>
   );
 }
