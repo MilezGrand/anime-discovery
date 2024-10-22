@@ -1,9 +1,13 @@
+import Text from "@/atoms/Text";
 import MangaListView from "@/views/manga/MangaListView";
 
 async function MangaListPage() {
   return (
     <>
-      <h2 className="text-3xl text-white font-bold">Популярная манга</h2>
+      <Text weight="bold" size="3xl">
+        Популярная манга
+      </Text>
+
       <MangaListView />
     </>
   );

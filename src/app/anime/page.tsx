@@ -1,9 +1,13 @@
+import Text from "@/atoms/Text";
 import { AnimeListView } from "@/views/anime";
 
 async function AnimeListPage() {
   return (
     <>
-      <h2 className="text-3xl text-white font-bold">Популярное аниме</h2>
+      <Text weight="bold" size="3xl">
+        Популярное аниме
+      </Text>
+
       <AnimeListView />
     </>
   );

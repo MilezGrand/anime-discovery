@@ -22,7 +22,7 @@ async function MangaListMoreView() {
         />
       ))}
       <Link href="/manga">
-        <div className="h-[350px] border-2 border-slate-700  hover:bg-slate-700 text-xl rounded-xl p-4 flex justify-center items-center">
+        <div className="h-[370px] border-2 border-slate-700  hover:bg-slate-700 text-xl rounded-xl p-4 flex justify-center items-center">
           Еще
         </div>
       </Link>

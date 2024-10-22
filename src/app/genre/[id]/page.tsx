@@ -1,10 +1,11 @@
 import { fetchAllGenres } from "@lib/actions";
 import { genreType } from "@/types";
 import { AnimeListByGenreView } from "@/views/anime";
+import Text from "@/atoms/Text";
 
 type propsProps = {
   params: { id: string };
-}
+};
 
 const ListByGenrePage = async ({ params }: propsProps) => {
   const id = params.id;
@@ -16,9 +17,10 @@ const ListByGenrePage = async ({ params }: propsProps) => {
 
   return (
     <>
-      <h2 className="text-3xl text-white font-bold">
+      <Text weight="bold" size="3xl">
         Аниме жанра <span className="red-gradient">{genre[0].russian}</span>
-      </h2>
+      </Text>
+
       <AnimeListByGenreView genreId={id} />
     </>
   );

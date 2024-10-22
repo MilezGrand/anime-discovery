@@ -11,7 +11,7 @@ type propsType = {
 function CardTemplate({ poster, name, kind, episodes, score }: propsType) {
   return (
     <div className="d-flex flex-col">
-      <div className="relative w-full h-[350px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
+      <div className="relative w-full h-[370px] rounded-xl hover:outline outline-offset-2 outline-4 outline-rose-400">
         {poster}
       </div>
       <div className="py-4 flex flex-col gap-3">

@@ -1,19 +1,19 @@
+import Text from "@/atoms/Text";
 import { AnimeListMoreView } from "@/views/anime";
 import { MangaListMoreView } from "@/views/manga";
 
 async function Home() {
-
   return (
     <>
-      <h2 className="text-3xl text-white font-bold">
+      <Text weight="bold" size="3xl">
         Аниме <span className="red-gradient">アニメ</span>
-      </h2>
+      </Text>
 
       <AnimeListMoreView />
 
-      <h2 className="text-3xl text-white font-bold">
+      <Text weight="bold" size="3xl">
         Манга <span className="red-gradient">マンガ</span>
-      </h2>
+      </Text>
 
       <MangaListMoreView />
     </>
